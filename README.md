@@ -16,7 +16,7 @@ cd internet-monitoring
 docker-compose up -d
 ```
 
-Go to [http://100.64.0.3:3030/d/wan/internet-connection](http://100.64.0.3:3030/d/wan/internet-connection)
+Go to [http://eepi1.home:3030/d/wan/internet-connection](http://eepi1.home:3030/d/wan/internet-connection)
 
 ## Configuration
 
@@ -30,26 +30,26 @@ Once configurations are done, run the following command:
 
 That's it. docker-compose builds the entire Grafana and Prometheus stack automagically.
 
-The Grafana Dashboard is now accessible via: http://100.64.0.3:3030
+The Grafana Dashboard is now accessible via: http://eepi1.home:3030
 
 username - admin
 password - (Password is stored in the `config.monitoring` env file)
 
 The DataSource and Dashboard for Grafana are automatically provisioned.
 
-If all works it should be available at http://100.64.0.3:3030/d/wan/internet-connection - if no data shows up try change the timeduration to something smaller.
+If all works it should be available at http://eepi1.home:3030/d/wan/internet-connection - if no data shows up try change the timeduration to something smaller.
 
 <center><img src="images/dashboard.png" width="4600" heighth="500"></center>
 
 ## Interesting urls
 
-http://100.64.0.3:9090/targets shows status of monitored targets as seen from prometheus - in this case which hosts being pinged and speedtest. note: speedtest will take a while before it shows as UP as it takes about 30s to respond.
+http://eepi1.home:9090/targets shows status of monitored targets as seen from prometheus - in this case which hosts being pinged and speedtest. note: speedtest will take a while before it shows as UP as it takes about 30s to respond.
 
-http://100.64.0.3:9090/graph?g0.expr=probe_http_status_code&g0.tab=1 shows prometheus value for `probe_http_status_code` for each host. You can edit/play with additional values. Useful to check everything is okey in prometheus (in case Grafana is not showing the data you expect).
+http://eepi1.home:9090/graph?g0.expr=probe_http_status_code&g0.tab=1 shows prometheus value for `probe_http_status_code` for each host. You can edit/play with additional values. Useful to check everything is okey in prometheus (in case Grafana is not showing the data you expect).
 
-http://100.64.0.3:9115 blackbox exporter endpoint. Lets you see what have failed/succeded.
+http://eepi1.home:9115 blackbox exporter endpoint. Lets you see what have failed/succeded.
 
-http://100.64.0.3:9798/metrics speedtest exporter endpoint. Does take about 30 seconds to show its result as it runs an actual speedtest when requested.
+http://eepi1.home:9798/metrics speedtest exporter endpoint. Does take about 30 seconds to show its result as it runs an actual speedtest when requested.
 
 ## Thanks and a disclaimer
 
