@@ -525,7 +525,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -555,6 +555,6 @@
   },
   "timezone": "browser",
   "title": "Internet connection",
-  "uid": "o9mIe_Aik",
+  "uid": "wan",
   "version": 12
 }
