@@ -174,6 +174,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "left",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -260,7 +261,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Upload",
