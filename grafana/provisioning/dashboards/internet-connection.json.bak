@@ -29,13 +29,11 @@
           },
           "mappings": [
             {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
             }
           ],
           "thresholds": {
@@ -78,7 +76,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "expr": "speedtest_download_bits_per_second{}",
@@ -102,13 +100,11 @@
           },
           "mappings": [
             {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
             }
           ],
           "thresholds": {
@@ -151,7 +147,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
           "expr": "speedtest_upload_bits_per_second{}",
@@ -171,44 +167,16 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
-          "custom": {
-            "axisPlacement": "left",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 3,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
+          "decimals": 2,
           "mappings": [
             {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
             }
           ],
           "thresholds": {
@@ -224,7 +192,7 @@
               }
             ]
           },
-          "unit": "Mbits"
+          "unit": "ms"
         },
         "overrides": []
       },
@@ -239,36 +207,32 @@
       "links": [],
       "maxDataPoints": 50000,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "7.5.6",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsRxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
-          "hide": false,
+          "expr": "speedtest_ping_latency_milliseconds",
+          "format": "time_series",
+          "instant": false,
           "interval": "",
-          "legendFormat": "WAN Download",
+          "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "WAN Upload",
-          "refId": "B"
         }
       ],
-      "title": "WAN Bandwidth",
-      "type": "timeseries"
+      "title": "Speedtest Ping",
+      "type": "gauge"
     },
     {
       "datasource": "prometheus",
@@ -287,8 +251,7 @@
             "hideFrom": {
               "graph": false,
               "legend": false,
-              "tooltip": false,
-              "viz": false
+              "tooltip": false
             },
             "lineInterpolation": "linear",
             "lineWidth": 0,
@@ -297,14 +260,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": true
           },
           "mappings": [],
           "thresholds": {
@@ -340,7 +296,7 @@
           "displayMode": "list",
           "placement": "right"
         },
-        "tooltip": {
+        "tooltipOptions": {
           "mode": "multi"
         }
       },
@@ -400,6 +356,10 @@
         ]
       },
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -461,6 +421,10 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -489,7 +453,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.6",
+      "pluginVersion": "7.5.6",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -550,8 +514,8 @@
       }
     }
   ],
-  "refresh": "",
-  "schemaVersion": 30,
+  "refresh": "5m",
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "speedtest",
@@ -592,4 +556,5 @@
   "timezone": "browser",
   "title": "Internet connection",
   "uid": "wan",
-  "version": 1
+  "version": 12
+}
