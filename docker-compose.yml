@@ -89,3 +89,13 @@ services:
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     networks:
       - back-tier
+
+  snmp:
+    image: "prom/snmp-exporter"
+    restart: "always"
+    ports:
+      - 9116:9116
+    volumes:
+      - ~/snmp_exporter/generator/snmp.yml:/etc/snmp_exporter/snmp.yml
+    networks:
+      - front-tier
