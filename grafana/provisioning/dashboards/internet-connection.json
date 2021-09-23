@@ -263,6 +263,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 30,
+            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -289,6 +291,8 @@
             }
           },
           "mappings": [],
+          "max": 100,
+          "min": -100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -322,42 +326,43 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"9\"}[5m])*-1 *8 /1000000",
-          "format": "time_series",
-          "interval": "",
-          "legendFormat": "5G Up",
-          "queryType": "randomWalk",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"9\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "5G Down",
+          "legendFormat": "EE-5 Down",
           "queryType": "randomWalk",
-          "refId": "B"
+          "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"10\"}[5m])*-1*8 /1000000",
+          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*-1*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "2.4G Up",
+          "legendFormat": "EE-5 Up",
           "queryType": "randomWalk",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"10\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "2.4G Down",
+          "legendFormat": "EE-2.4 Down",
           "queryType": "randomWalk",
-          "refId": "D"
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*-1 *8 /1000000",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "EE-2.4 Up",
+          "queryType": "randomWalk",
+          "refId": "A"
         }
       ],
       "title": "WLAN Interfaces",
@@ -762,7 +767,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -793,5 +798,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 7
+  "version": 11
 }
