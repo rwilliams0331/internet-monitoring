@@ -30,6 +30,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "left",
+            "axisSoftMax": 30,
+            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -136,6 +138,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "left",
+            "axisSoftMax": 30,
+            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -177,7 +181,32 @@
           },
           "unit": "Mbits"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "AP Down"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -257,6 +286,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -366,6 +396,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMin": 0,
             "barAlignment": 0,
@@ -757,7 +788,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -788,5 +819,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 5
+  "version": 6
 }
