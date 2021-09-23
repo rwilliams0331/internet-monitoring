@@ -109,7 +109,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether1\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Down",
@@ -117,7 +117,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether1\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Upload",
@@ -229,7 +229,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether2\"}[5m]) * 8 / 1000000",
           "interval": "",
           "legendFormat": "AP Down",
           "queryType": "randomWalk",
@@ -237,7 +237,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether2\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "AP Up",
@@ -245,7 +245,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether3\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi1 Down",
@@ -253,7 +253,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether3\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi1 Up",
@@ -261,7 +261,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether4\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi2 Down",
@@ -269,7 +269,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether4\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi2 Up",
@@ -352,7 +352,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{ifIndex=\"29\"}[5m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -362,7 +362,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*-1*8 /1000000",
+          "expr": "irate(ifHCInOctets{ifIndex=\"29\"}[5m])*-1*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -372,7 +372,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{ifIndex=\"28\"}[5m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -382,7 +382,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*-1 *8 /1000000",
+          "expr": "irate(ifHCInOctets{ifIndex=\"28\"}[5m])*-1 *8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -678,7 +678,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "ruckusUnleashedSystemStatsNumSta{job=\"snmp_ruckus\"}",
+          "expr": "ruckusUnleashedSystemStatsNumSta{}",
           "interval": "",
           "legendFormat": "Stations",
           "queryType": "randomWalk",
