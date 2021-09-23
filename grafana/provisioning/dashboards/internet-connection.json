@@ -109,15 +109,15 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsRxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
-          "legendFormat": "WAN Download",
+          "legendFormat": "WAN Down",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Upload",
@@ -181,32 +181,7 @@
           },
           "unit": "Mbits"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "AP Down"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -299,12 +274,12 @@
             },
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -350,7 +325,7 @@
           "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"9\"}[5m])*-1 *8 /1000000",
           "format": "time_series",
           "interval": "",
-          "legendFormat": "5 Up",
+          "legendFormat": "5G Up",
           "queryType": "randomWalk",
           "refId": "A"
         },
@@ -360,7 +335,7 @@
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "5 Down",
+          "legendFormat": "5G Down",
           "queryType": "randomWalk",
           "refId": "B"
         },
@@ -370,7 +345,7 @@
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "2.4 Up",
+          "legendFormat": "2.4G Up",
           "queryType": "randomWalk",
           "refId": "C"
         },
@@ -380,7 +355,7 @@
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "2.4 Down",
+          "legendFormat": "2.4G Down",
           "queryType": "randomWalk",
           "refId": "D"
         }
@@ -398,6 +373,7 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 2,
             "axisSoftMin": 0,
             "barAlignment": 0,
             "drawStyle": "line",
@@ -425,7 +401,6 @@
             }
           },
           "mappings": [],
-          "max": 10,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -819,5 +794,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 6
+  "version": 7
 }
