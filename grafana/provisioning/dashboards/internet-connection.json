@@ -181,7 +181,33 @@
           },
           "unit": "Mbits"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Pi1 Down",
+                  "AP Up"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -203,7 +229,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
           "interval": "",
           "legendFormat": "AP Down",
           "queryType": "randomWalk",
@@ -211,7 +237,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsRxBytes{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "AP Up",
@@ -219,7 +245,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi1 Down",
@@ -227,7 +253,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsRxBytes{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi1 Up",
@@ -235,7 +261,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsTxBytes{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi2 Down",
@@ -243,7 +269,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(mtxrInterfaceStatsRxBytes{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "Pi2 Up",
