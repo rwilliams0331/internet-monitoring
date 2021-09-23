@@ -756,7 +756,6 @@
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
-    "speedtest",
     "ping"
   ],
   "templating": {
