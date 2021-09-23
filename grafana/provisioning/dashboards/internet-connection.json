@@ -257,7 +257,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -291,10 +290,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -308,7 +303,7 @@
         "x": 0,
         "y": 8
       },
-      "id": 22,
+      "id": 24,
       "options": {
         "legend": {
           "calcs": [],
@@ -322,22 +317,45 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalTxBytes{job=\"snmp_ruckus\"}[5m]) *8 /10000000",
+          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"9\"}[5m])*-1 *8 /1000000",
+          "format": "time_series",
           "interval": "",
-          "legendFormat": "Total Down",
+          "legendFormat": "5 Up",
           "queryType": "randomWalk",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalRxBytes{job=\"snmp_ruckus\"}[5m]) *8 /10000000 *-1",
+          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"9\"}[5m])*8 /1000000",
+          "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "Total Up",
+          "legendFormat": "5 Down",
+          "queryType": "randomWalk",
           "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"10\"}[5m])*-1*8 /1000000",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "2.4 Up",
+          "queryType": "randomWalk",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"10\"}[5m])*8 /1000000",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "2.4 Down",
+          "queryType": "randomWalk",
+          "refId": "D"
         }
       ],
-      "title": "WLAN Bandwidth",
+      "title": "WLAN Interfaces",
       "type": "timeseries"
     },
     {
@@ -348,9 +366,9 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 1,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -376,6 +394,7 @@
             }
           },
           "mappings": [],
+          "max": 10,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -388,8 +407,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -399,12 +417,12 @@
         "x": 12,
         "y": 8
       },
-      "id": 18,
+      "id": 26,
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "right"
         },
         "tooltip": {
           "mode": "single"
@@ -413,258 +431,52 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "ruckusUnleashedSystemStatsNumSta{job=\"snmp_ruckus\"}",
+          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalTxRetry[1m])",
+          "hide": false,
+          "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "TxRetry",
           "queryType": "randomWalk",
           "refId": "A"
-        }
-      ],
-      "title": "WLAN Stations",
-      "type": "timeseries"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46",
-                "value": null
-              },
-              {
-                "color": "blue",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 0,
-        "y": 16
-      },
-      "id": 8,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 50000,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.0.6",
-      "targets": [
-        {
-          "expr": "speedtest_download_bits_per_second{}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Download",
-      "type": "gauge"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "blue",
-                "value": 20
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 6,
-        "y": 16
-      },
-      "id": 10,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 50000,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.0.6",
-      "targets": [
-        {
-          "expr": "speedtest_upload_bits_per_second{}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Upload",
-      "type": "gauge"
-    },
-    {
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 0,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 16
-      },
-      "id": 6,
-      "links": [],
-      "maxDataPoints": 50000,
-      "options": {
-        "graph": {},
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "multi"
-        }
-      },
-      "pluginVersion": "7.4.5",
-      "repeat": null,
-      "targets": [
-        {
-          "expr": "speedtest_download_bits_per_second{}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Download",
-          "refId": "A"
         },
         {
-          "expr": "speedtest_upload_bits_per_second{}",
+          "exemplar": true,
+          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalTxDroppedPkt[1m])",
           "hide": false,
           "interval": "",
-          "legendFormat": "Upload",
+          "legendFormat": "TxDroppedPkt",
+          "queryType": "randomWalk",
           "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalTxFail[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TxFail",
+          "queryType": "randomWalk",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalTxErrFrm[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TxErrFrm",
+          "queryType": "randomWalk",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "irate(ruckusUnleashedSystemStatsWLANTotalRxErrFrm[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RxErrFrm",
+          "queryType": "randomWalk",
+          "refId": "E"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Speedtest Graph",
+      "title": "WLAN Errors",
       "type": "timeseries"
     },
     {
@@ -703,7 +515,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 25
+        "y": 16
       },
       "highlightCards": true,
       "id": 14,
@@ -755,6 +567,91 @@
       }
     },
     {
+      "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 1,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 10,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "ruckusUnleashedSystemStatsNumSta{job=\"snmp_ruckus\"}",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "WLAN Stations",
+      "type": "timeseries"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -766,7 +663,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 4,
@@ -860,7 +757,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -889,7 +786,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Internet connection",
+  "title": "internet-connection",
   "uid": "wan",
-  "version": 4
+  "version": 5
 }
