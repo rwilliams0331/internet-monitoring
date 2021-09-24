@@ -34,7 +34,7 @@
             "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -109,7 +109,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether1\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifName=\"ether1\"}[5m]) * 8 / 1048576",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Down",
@@ -117,7 +117,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether1\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifName=\"ether1\"}[5m]) * 8 / 1048576 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Up",
@@ -138,11 +138,9 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "left",
-            "axisSoftMax": 30,
-            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -203,7 +201,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=~\"ether[2-5]\"}[5m]) * 8 / 1000000",
+          "expr": "rate(ifHCOutOctets{ifName=~\"ether[2-5]\"}[2m]) * 8 / 1048576",
           "hide": false,
           "interval": "",
           "legendFormat": "{{ifName}} Down",
@@ -212,7 +210,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=~\"ether[2-5]\"}[5m]) * 8 / 1000000 *-1",
+          "expr": "rate(ifHCInOctets{ifName=~\"ether[2-5]\"}[2m]) * 8 / 1048576 *-1",
           "hide": false,
           "interval": "",
           "legendFormat": "{{ifName}} Up",
@@ -233,11 +231,9 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 30,
-            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -261,8 +257,6 @@
             }
           },
           "mappings": [],
-          "max": 100,
-          "min": -100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -357,7 +351,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifIndex=~\"2[8-9]\"}[5m])*8 /1000000",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\"}[1m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -367,7 +361,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifIndex=~\"2[8-9]\"}[5m])*-1*8 /1000000",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\"}[1m])*-1*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -829,5 +823,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 18
+  "version": 20
 }
