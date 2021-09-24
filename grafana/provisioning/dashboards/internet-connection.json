@@ -203,51 +203,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether2\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCOutOctets{ifName=~\"ether[2-5]\"}[5m]) * 8 / 1000000",
+          "hide": false,
           "interval": "",
-          "legendFormat": "AP Down",
+          "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether2\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCInOctets{ifName=~\"ether[2-5]\"}[5m]) * 8 / 1000000 *-1",
           "hide": false,
           "interval": "",
-          "legendFormat": "AP Up",
+          "legendFormat": "{{ifName}} Up",
+          "queryType": "randomWalk",
           "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether3\"}[5m]) * 8 / 1000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi1 Down",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether3\"}[5m]) * 8 / 1000000 * -1",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi1 Up",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether4\"}[5m]) * 8 / 1000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi2 Down",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether4\"}[5m]) * 8 / 1000000 * -1",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi2 Up",
-          "refId": "F"
         }
       ],
       "title": "Mikrotik LAN Bandwidth",
@@ -304,7 +274,68 @@
           },
           "unit": "Mbits"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan0 Up"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan32 Down"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan32 Up"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan0 Down"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -326,21 +357,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifIndex=\"29\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{ifIndex=~\"2[8-9]\"}[5m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "EE-5 Down",
+          "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifIndex=\"29\"}[5m])*-1*8 /1000000",
+          "expr": "irate(ifHCInOctets{ifIndex=~\"2[8-9]\"}[5m])*-1*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "EE-5 Up",
+          "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
           "refId": "C"
         },
@@ -348,7 +379,7 @@
           "exemplar": true,
           "expr": "irate(ifHCOutOctets{ifIndex=\"28\"}[5m])*8 /1000000",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "EE-2.4 Down",
           "queryType": "randomWalk",
@@ -358,7 +389,7 @@
           "exemplar": true,
           "expr": "irate(ifHCInOctets{ifIndex=\"28\"}[5m])*-1 *8 /1000000",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "EE-2.4 Up",
           "queryType": "randomWalk",
