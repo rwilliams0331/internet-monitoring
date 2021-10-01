@@ -34,7 +34,7 @@
             "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -109,7 +109,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "irate(ifHCInOctets{ifIndex=\"1\", instance=\"100.64.0.1\"}[5m]) * 8 / 1048576",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Down",
@@ -117,10 +117,10 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "irate(ifHCOutOctets{ifIndex=\"1\", instance=\"100.64.0.1\"}[5m]) * 8 / 1048576 * -1",
           "hide": false,
           "interval": "",
-          "legendFormat": "WAN Upload",
+          "legendFormat": "WAN Up",
           "refId": "B"
         }
       ],
@@ -138,11 +138,9 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "left",
-            "axisSoftMax": 30,
-            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -181,33 +179,7 @@
           },
           "unit": "Mbits"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Pi1 Down",
-                  "AP Up"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -229,51 +201,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"[2-4]\", instance=\"100.64.0.1\"}[2m]) * 8 / 1048576",
+          "hide": false,
           "interval": "",
-          "legendFormat": "AP Down",
+          "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether2\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"[2-4]\", instance=\"100.64.0.1\"}[2m]) * 8 / 1048576 *-1",
           "hide": false,
           "interval": "",
-          "legendFormat": "AP Up",
+          "legendFormat": "{{ifName}} Up",
+          "queryType": "randomWalk",
           "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi1 Down",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether3\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi1 Up",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi2 Down",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifName=\"ether4\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1000000 * -1",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Pi2 Up",
-          "refId": "F"
         }
       ],
       "title": "Mikrotik LAN Bandwidth",
@@ -289,11 +231,9 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 30,
-            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -317,8 +257,6 @@
             }
           },
           "mappings": [],
-          "max": 100,
-          "min": -100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -330,7 +268,68 @@
           },
           "unit": "Mbits"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan0 Up"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan32 Down"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan32 Up"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wlan0 Down"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -352,29 +351,29 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*8 /1000000",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\"}[1m])*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "EE-5 Down",
+          "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"29\"}[5m])*-1*8 /1000000",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\"}[1m])*-1*8 /1000000",
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "legendFormat": "EE-5 Up",
+          "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*8 /1000000",
+          "expr": "irate(ifHCOutOctets{ifIndex=\"28\"}[5m])*8 /1000000",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "EE-2.4 Down",
           "queryType": "randomWalk",
@@ -382,9 +381,9 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{job=\"snmp_ruckus\", ifIndex=\"28\"}[5m])*-1 *8 /1000000",
+          "expr": "irate(ifHCInOctets{ifIndex=\"28\"}[5m])*-1 *8 /1000000",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "EE-2.4 Up",
           "queryType": "randomWalk",
@@ -678,7 +677,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "ruckusUnleashedSystemStatsNumSta{job=\"snmp_ruckus\"}",
+          "expr": "ruckusUnleashedSystemStatsNumSta{}",
           "interval": "",
           "legendFormat": "Stations",
           "queryType": "randomWalk",
@@ -793,7 +792,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -824,5 +823,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 11
+  "version": 22
 }
