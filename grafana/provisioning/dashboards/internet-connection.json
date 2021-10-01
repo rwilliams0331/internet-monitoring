@@ -270,6 +270,30 @@
         },
         "overrides": [
           {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "wlan32 Down"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
             "matcher": {
               "id": "byName",
               "options": "wlan0 Up"
@@ -351,7 +375,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\",job=\"snmp_ruckus\"}[1m])*8 /1048576",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\", job=\"snmp_ruckus\"}[1m])*8 / 1048576",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -361,14 +385,14 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\",job=\"snmp_ruckus\"}[1m])*-1*8 /1048576",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\", job=\"snmp_ruckus\"}[1m])*-1*8 / 1048576",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "interval": "",
           "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
           "refId": "C"
-        },
+        }
       ],
       "title": "WLAN Interfaces",
       "type": "timeseries"
@@ -772,7 +796,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -803,5 +827,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 22
+  "version": 23
 }
