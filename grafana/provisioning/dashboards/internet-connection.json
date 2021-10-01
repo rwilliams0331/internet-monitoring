@@ -109,7 +109,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifIndex=\"1\", instance=\"100.64.0.1\"}[5m]) * 8 / 1048576",
+          "expr": "irate(ifHCInOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1048576",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Down",
@@ -117,7 +117,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifIndex=\"1\", instance=\"100.64.0.1\"}[5m]) * 8 / 1048576 * -1",
+          "expr": "irate(ifHCOutOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[5m]) * 8 / 1048576 * -1",
           "hide": false,
           "interval": "",
           "legendFormat": "WAN Up",
@@ -201,7 +201,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(ifHCOutOctets{ifIndex=~\"[2-4]\", instance=\"100.64.0.1\"}[2m]) * 8 / 1048576",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[2m]) * 8 / 1048576",
           "hide": false,
           "interval": "",
           "legendFormat": "{{ifName}} Down",
@@ -210,7 +210,7 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(ifHCInOctets{ifIndex=~\"[2-4]\", instance=\"100.64.0.1\"}[2m]) * 8 / 1048576 *-1",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[2m]) * 8 / 1048576 *-1",
           "hide": false,
           "interval": "",
           "legendFormat": "{{ifName}} Up",
@@ -351,7 +351,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\"}[1m])*8 /1000000",
+          "expr": "rate(ifHCOutOctets{ifIndex=~\"2[8-9]\",job=\"snmp_ruckus\"}[1m])*8 /1048576",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -361,7 +361,7 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\"}[1m])*-1*8 /1000000",
+          "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\",job=\"snmp_ruckus\"}[1m])*-1*8 /1048576",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -369,26 +369,6 @@
           "queryType": "randomWalk",
           "refId": "C"
         },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifIndex=\"28\"}[5m])*8 /1000000",
-          "format": "time_series",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "EE-2.4 Down",
-          "queryType": "randomWalk",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifIndex=\"28\"}[5m])*-1 *8 /1000000",
-          "format": "time_series",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "EE-2.4 Up",
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
       ],
       "title": "WLAN Interfaces",
       "type": "timeseries"
