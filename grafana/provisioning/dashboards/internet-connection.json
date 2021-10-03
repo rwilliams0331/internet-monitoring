@@ -86,7 +86,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 0
@@ -182,7 +182,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 0
@@ -332,10 +332,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 9
       },
       "id": 24,
       "options": {
@@ -428,10 +428,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 9
       },
       "id": 26,
       "options": {
@@ -531,7 +531,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 18
       },
       "highlightCards": true,
       "id": 14,
@@ -638,10 +638,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 18
       },
       "id": 18,
       "options": {
@@ -679,7 +679,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 27
       },
       "hiddenSeries": false,
       "id": 4,
@@ -762,7 +762,7 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": "30s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -803,5 +803,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 24
+  "version": 25
 }
