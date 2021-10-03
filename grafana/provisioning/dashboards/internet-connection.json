@@ -270,30 +270,6 @@
         },
         "overrides": [
           {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "wlan32 Down"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          },
-          {
             "matcher": {
               "id": "byName",
               "options": "wlan0 Up"
@@ -387,7 +363,7 @@
           "exemplar": true,
           "expr": "rate(ifHCInOctets{ifIndex=~\"2[8-9]\", job=\"snmp_ruckus\"}[1m])*-1*8 / 1048576",
           "format": "time_series",
-          "hide": true,
+          "hide": false,
           "interval": "",
           "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
@@ -827,5 +803,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 23
+  "version": 24
 }
