@@ -2,6 +2,8 @@
     - http://www.google.com/;google.com;external;internetbox
     - https://github.com/;github.com;external;internetbox
     - https://www.apple.com/;apple.com;external;internetbox
+    - https://165.166.157.253/;kershaw_fw;external;internetbox
+    - kershaw_fw;https://165.166.157.253/;external;internetbox
     # - http://192.168.1.1;internetbox;local;internetbox
     # - http://192.168.1.42;blackdata;local;orbirouter-attic
     # - http://192.168.1.101;orbirouter;local;orbirouter
