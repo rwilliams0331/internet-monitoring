@@ -16,7 +16,7 @@ modules:
       - expect: "^+OK"
       tls: true
       tls_config:
-        insecure_skip_verify: false
+        insecure_skip_verify: true
   ssh_banner:
     prober: tcp
     tcp:
