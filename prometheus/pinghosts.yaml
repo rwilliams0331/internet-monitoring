@@ -1,5 +1,5 @@
 - targets:  # url;humanname;routing;switch
-    - http://www.google.com/;google.com;external;internetbox
+    - https://www.google.com/;google.com;external;internetbox
     - https://github.com/;github.com;external;internetbox
     - https://www.apple.com/;apple.com;external;internetbox
     - https://165.166.157.253/;kershaw_fw;external;internetbox
