@@ -50,30 +50,20 @@ scrape_configs:
     scrape_interval: 5s
     params:
       module: [icmp_ipv4]  # Look for a icmp response.
-    file_sd_configs:
-      - files:
-        - pinghosts.yaml
+    static_configs:
+      - targets:
+        - google.com
+        - github.com
+        - apple.com
+        - 165.166.157.253
+        - 204.116.220.2
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
-        target_label: instance
-        replacement: $1
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
-        target_label: humanname
-        replacement: $2
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #third state whether this is testing external or internal network
-        target_label: routing
-        replacement: $3
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
-        target_label: switching
-        replacement: $4
-      - source_labels: [instance]
         target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
       - target_label: __address__
-        replacement: blackbox:9115  # The blackbox exporter's real hostname:port.
+        replacement: 127.0.0.1:9115  # This is your blackbox exporter.
 
   - job_name: 'nodeexp'
     static_configs:
