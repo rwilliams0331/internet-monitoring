@@ -30,8 +30,6 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "left",
-            "axisSoftMax": 30,
-            "axisSoftMin": -5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 20,
@@ -425,7 +423,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "TxErrFrm"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -527,11 +550,10 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "mappings": [],
-          "max": 10,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -567,11 +589,13 @@
           "mode": "single"
         }
       },
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "ruckusUnleashedSystemStatsNumSta{}",
+          "expr": "ruckusUnleashedSystemStatsNumSta",
           "interval": "",
+          "intervalFactor": 1,
           "legendFormat": "Stations",
           "queryType": "randomWalk",
           "refId": "A"
@@ -867,7 +891,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -898,5 +922,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 44
+  "version": 45
 }
