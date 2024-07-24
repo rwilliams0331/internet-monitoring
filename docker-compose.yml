@@ -43,7 +43,7 @@ services:
       - back-tier
       - front-tier
 
-  ping:
+  blackbox:
     tty: true
     stdin_open: true
     expose:
