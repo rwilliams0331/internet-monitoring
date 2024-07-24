@@ -3,7 +3,6 @@ modules:
     prober: http
     http:
       preferred_ip_protocol: "ip4"
-      tls: true
       tls_config:
         insecure_skip_verify: true
   http_post_2xx:
