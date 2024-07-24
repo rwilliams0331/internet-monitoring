@@ -63,7 +63,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 127.0.0.1:9115  # This is your blackbox exporter.
+        replacement: blackbox:9115  # This is your blackbox exporter.
 
   - job_name: 'nodeexp'
     static_configs:
