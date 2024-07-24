@@ -49,7 +49,7 @@ scrape_configs:
     metrics_path: /probe
     scrape_interval: 5s
     params:
-      module: [imcp_ipv4]  # Look for a icmp response.
+      module: [icmp_ipv4]  # Look for a icmp response.
     file_sd_configs:
       - files:
         - pinghosts.yaml
