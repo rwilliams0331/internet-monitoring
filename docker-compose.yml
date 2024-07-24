@@ -23,7 +23,7 @@ services:
     ports:
       - 9090:9090
     links:
-      - ping:ping
+      - blackbox:blackbox
     networks:
       - back-tier
 
