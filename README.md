@@ -38,6 +38,9 @@ The DataSource and Dashboard for Grafana are automatically provisioned.
 
 If all works it should be available at http://eepi1.home:3030/d/wan/internet-connection - if no data shows up try change the timeduration to something smaller.
 
+Reload Prometheus configuation with 'docker-compose kill -s SIGHUP prometheus'
+Reload Blackbox configuration, from terminal 'curl --request POST "http://eepi1.home:9115/-/reload"'
+
 <center><img src="images/dashboard.png" width="4600" heighth="500"></center>
 
 ## Interesting urls

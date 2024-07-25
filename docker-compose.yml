@@ -10,7 +10,7 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.25.2
+    image: prom/prometheus:main
     restart: always
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -23,7 +23,7 @@ services:
     ports:
       - 9090:9090
     links:
-      - ping:ping
+      - blackbox:blackbox
     networks:
       - back-tier
 
@@ -43,7 +43,7 @@ services:
       - back-tier
       - front-tier
 
-  ping:
+  blackbox:
     tty: true
     stdin_open: true
     expose:

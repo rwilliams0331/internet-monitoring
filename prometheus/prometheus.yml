@@ -15,7 +15,7 @@ scrape_configs:
     static_configs:
          - targets: ['localhost:9090']
 
-  - job_name: 'ping'
+  - job_name: 'blackbox-http'
     metrics_path: /probe
     scrape_interval: 5s
     params:
@@ -43,7 +43,28 @@ scrape_configs:
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
-        replacement: ping:9115  # The blackbox exporter's real hostname:port.
+        replacement: blackbox:9115  # The blackbox exporter's real hostname:port.
+
+  - job_name: 'blackbox-icmp'
+    metrics_path: /probe
+    scrape_interval: 5s
+    params:
+      module: [icmp_ipv4]  # Look for a icmp response.
+    static_configs:
+      - targets:
+        - google.com
+        - github.com
+        - apple.com
+        - 165.166.157.253
+        - 204.116.220.2
+        - 64.139.91.217
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115  # This is your blackbox exporter.
 
   - job_name: 'nodeexp'
     static_configs:
@@ -73,6 +94,23 @@ scrape_configs:
     metrics_path: "/snmp"
     params:
       module: [ruckus]
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 100.64.0.3:9116  # The SNMP exporter's real hostname:port.
+
+  - job_name: 'mikrotik_test'
+    static_configs:
+      - targets:
+        - "100.64.0.1"
+    metrics_path: "/snmp"
+    params:
+      module: [mikrotik_test]
     scrape_interval: 10s
     scrape_timeout: 5s
     relabel_configs:
