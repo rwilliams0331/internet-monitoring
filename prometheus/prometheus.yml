@@ -57,6 +57,7 @@ scrape_configs:
         - apple.com
         - 165.166.157.253
         - 204.116.220.2
+        - 64.139.91.217
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
