@@ -56,7 +56,6 @@ scrape_configs:
         - github.com
         - apple.com
         - 165.166.157.253
-        - 204.116.220.2
         - 64.139.91.217
     relabel_configs:
       - source_labels: [__address__]
