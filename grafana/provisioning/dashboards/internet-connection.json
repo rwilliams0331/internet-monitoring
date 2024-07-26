@@ -686,7 +686,7 @@
         "minWidth": -1,
         "show": true
       },
-      "yAxisSort": "metrics",
+      "yAxisSort": "a → z",
       "yLabel": {
         "delimiter": "",
         "labelTemplate": "",
@@ -775,7 +775,7 @@
         "minWidth": -1,
         "show": true
       },
-      "yAxisSort": "metrics",
+      "yAxisSort": "a → z",
       "yLabel": {
         "delimiter": "",
         "labelTemplate": "",
@@ -922,5 +922,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 45
+  "version": 48
 }
