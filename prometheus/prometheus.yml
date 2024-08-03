@@ -50,13 +50,9 @@ scrape_configs:
     scrape_interval: 5s
     params:
       module: [icmp_ipv4]  # Look for a icmp response.
-    static_configs:
-      - targets:
-        - google.com
-        - github.com
-        - apple.com
-        - 165.166.157.253
-        - 64.139.91.217
+    file_sd_configs:
+      - files:
+        - pinghosts.yaml
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
