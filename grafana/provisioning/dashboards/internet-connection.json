@@ -31,7 +31,7 @@
             "axisLabel": "Mb/s",
             "axisPlacement": "left",
             "axisSoftMax": 40,
-            "barAlignment": 0,
+            "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -40,13 +40,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
-            "pointSize": 3,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -56,27 +56,14 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -85,7 +72,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
@@ -108,7 +95,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "irate(ifHCInOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[1m]) * 8 / 1048576",
+          "expr": "max_over_time((irate(ifHCInOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -117,7 +104,7 @@
         },
         {
           "exemplar": true,
-          "expr": "irate(ifHCOutOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[1m]) * 8 / 1048576",
+          "expr": "max_over_time((irate(ifHCOutOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -167,16 +154,13 @@
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -185,10 +169,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 9
       },
       "id": 16,
       "options": {
@@ -204,7 +188,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(ifHCOutOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[1m]) * 8 / 1048576",
+          "expr": "max_over_time((irate(ifHCOutOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -214,7 +198,7 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(ifHCInOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[1m]) * 8 / 1048576",
+          "expr": "max_over_time((irate(ifHCInOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -247,11 +231,11 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 0,
+            "lineWidth": 1,
             "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
@@ -267,6 +251,7 @@
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -284,7 +269,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 18
       },
       "id": 24,
       "options": {
@@ -300,7 +285,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate(ifHCOutOctets{ifIndex=~\"9|10\", job=\"snmp_ruckus\"}[1m])*8 / 1048576",
+          "expr": "max_over_time((irate(ifHCOutOctets{ifIndex=~\"9|10\", job=\"snmp_ruckus\"}[45s]))[$__interval:10s])*8/1048576",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -311,7 +296,7 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(ifHCInOctets{ifIndex=~\"9|10\", job=\"snmp_ruckus\"}[1m])*8 / 1048576",
+          "expr": "max_over_time((irate(ifHCInOctets{ifIndex=~\"9|10\", job=\"snmp_ruckus\"}[45s]))[$__interval:10s])*8/1048576",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -327,6 +312,109 @@
     },
     {
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Million",
+            "axisPlacement": "left",
+            "axisSoftMax": 200,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 26,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxRetry[45s]))[$__interval:10s])/10000000",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "TxRetry",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxErrFrm[45s]))[$__interval:10s])/10000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TxErrFrm",
+          "queryType": "randomWalk",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalRxErrFrm[45s]))[$__interval:10s])/10000000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RxErrFrm",
+          "queryType": "randomWalk",
+          "refId": "E"
+        }
+      ],
+      "title": "WLAN Errors",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "prometheus",
       "description": "The number of packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol.",
       "fieldConfig": {
         "defaults": {
@@ -334,6 +422,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": -1,
             "drawStyle": "line",
@@ -382,7 +471,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 37
       },
       "id": 30,
       "options": {
@@ -428,38 +517,9 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 1,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -472,27 +532,31 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 3,
+        "w": 23,
         "x": 0,
-        "y": 40
+        "y": 46
       },
       "id": 18,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single"
-        }
+        "text": {},
+        "textMode": "auto"
       },
       "pluginVersion": "8.0.6",
       "targets": [
@@ -507,166 +571,7 @@
         }
       ],
       "title": "WLAN Stations",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "Million",
-            "axisPlacement": "auto",
-            "axisSoftMax": 650,
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "TxRetry"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 40
-      },
-      "id": 26,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxRetry[45s]))[$__interval:10s])/10000000",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "TxRetry",
-          "queryType": "randomWalk",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxDroppedPkt[45s]))[$__interval:10s])/10000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "TxDroppedPkt",
-          "queryType": "randomWalk",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxFail[45s]))[$__interval:10s])/10000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "TxFail",
-          "queryType": "randomWalk",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxErrFrm[45s]))[$__interval:10s])/10000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "TxErrFrm",
-          "queryType": "randomWalk",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalRxErrFrm[45s]))[$__interval:10s])/10000000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "RxErrFrm",
-          "queryType": "randomWalk",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxRetry[45s]))[$__interval:10s])/10000000",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "TotalTxRetry-new",
-          "refId": "F"
-        }
-      ],
-      "title": "WLAN Errors",
-      "transparent": true,
-      "type": "timeseries"
+      "type": "stat"
     },
     {
       "cards": {
@@ -701,7 +606,7 @@
       },
       "datasource": "prometheus",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 49
@@ -790,7 +695,7 @@
       },
       "datasource": "prometheus",
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 12,
         "x": 12,
         "y": 49
@@ -855,8 +760,9 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 20,
+            "axisSoftMax": 10,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -901,7 +807,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 55
       },
       "id": 28,
       "options": {
@@ -947,7 +853,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -978,5 +884,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 50
+  "version": 52
 }
