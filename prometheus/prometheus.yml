@@ -43,7 +43,7 @@ scrape_configs:
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
-        replacement: eepi:9115  # The blackbox exporter's real hostname:port.
+        replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
 
   - job_name: 'blackbox-icmp'
     metrics_path: /probe
@@ -67,7 +67,7 @@ scrape_configs:
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
-        replacement: eepi:9115  # The blackbox exporter's real hostname:port.
+        replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
 
 
   - job_name: 'nodeexp'
@@ -89,7 +89,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: eepi:9116  # The SNMP exporter's real hostname:port.
+        replacement: 100.64.0.3:9116  # The SNMP exporter's real hostname:port.
 
   - job_name: 'snmp_ruckus'
     static_configs:
@@ -106,7 +106,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: eepi:9116  # The SNMP exporter's real hostname:port.
+        replacement: 100.64.0.3:9116  # The SNMP exporter's real hostname:port.
 
   - job_name: 'mikrotik_test'
     static_configs:
@@ -123,4 +123,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: eepi:9116  # The SNMP exporter's real hostname:port.
+        replacement: 100.64.0.3:9116  # The SNMP exporter's real hostname:port.
