@@ -64,7 +64,7 @@ scrape_configs:
         regex: '(.*);(.*)'  #second is humanname to use in charts
         target_label: humanname
         replacement: $2
-      - source_labels: [humanname]
+      - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
         replacement: eepi:9115  # The blackbox exporter's real hostname:port.
