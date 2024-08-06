@@ -30,7 +30,7 @@
           "custom": {
             "axisLabel": "Mb/s",
             "axisPlacement": "left",
-            "axisSoftMax": 40,
+            "axisSoftMax": 80,
             "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -98,7 +98,7 @@
           "expr": "max_over_time((irate(ifHCInOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "INET Down",
           "refId": "A"
         },
@@ -106,8 +106,9 @@
           "exemplar": true,
           "expr": "max_over_time((irate(ifHCOutOctets{ifIndex=\"1\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
+          "instant": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "INET Up",
           "refId": "B"
         }
@@ -191,7 +192,7 @@
           "expr": "max_over_time((irate(ifHCOutOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "A"
@@ -201,7 +202,7 @@
           "expr": "max_over_time((irate(ifHCInOctets{ifIndex=~\"[2-4]\", job=\"snmp_mikrotik\"}[45s]))[$__interval:10s])*8/1048576",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
           "refId": "B"
@@ -289,7 +290,7 @@
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "{{ifName}} Down",
           "queryType": "randomWalk",
           "refId": "D"
@@ -300,7 +301,7 @@
           "format": "time_series",
           "hide": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "{{ifName}} Up",
           "queryType": "randomWalk",
           "refId": "C"
@@ -359,7 +360,33 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "TxRetry",
+                  "TxErrFrm"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 10,
@@ -385,7 +412,7 @@
           "hide": false,
           "instant": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "TxRetry",
           "queryType": "randomWalk",
           "refId": "A"
@@ -395,6 +422,7 @@
           "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalTxErrFrm[45s]))[$__interval:10s])/10000000",
           "hide": false,
           "interval": "",
+          "intervalFactor": 5,
           "legendFormat": "TxErrFrm",
           "queryType": "randomWalk",
           "refId": "D"
@@ -404,6 +432,7 @@
           "expr": "max_over_time((irate(ruckusUnleashedSystemStatsWLANTotalRxErrFrm[45s]))[$__interval:10s])/10000000",
           "hide": false,
           "interval": "",
+          "intervalFactor": 5,
           "legendFormat": "RxErrFrm",
           "queryType": "randomWalk",
           "refId": "E"
@@ -831,7 +860,7 @@
           "expr": "rate({phase=\"tls\"}[$__interval])*1000",
           "instant": false,
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 5,
           "legendFormat": "{{instance}}",
           "refId": "A"
         }
@@ -884,5 +913,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 52
+  "version": 54
 }
