@@ -45,21 +45,19 @@ scrape_configs:
     scrape_interval: 5s
     params:
       module: [icmp_ipv4]  # Look for a icmp response.
-    dns_sd_configs:
-      - names:
+    static_configs:
+      - targets:
           - google.com
           - github.com
           - apple.com
-        type: A
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: [__address__]
         target_label: instance
-      - target_label: __address__
-        replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
-      - source_labels: [__meta_dns_name]
-        target_label: vhost  # and store it in 'vhost' label
+      - source_labels: []
+        target_label: __address__
+        replacement: 100.64.0.3:9115  # Blackbox exporter.
 
   - job_name: 'nodeexp'
     static_configs:
