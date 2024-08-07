@@ -50,6 +50,7 @@ scrape_configs:
           - google.com
           - github.com
           - apple.com
+        type: A
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
