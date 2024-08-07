@@ -44,6 +44,8 @@ scrape_configs:
         target_label: __param_target
       - target_label: __address__
         replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
+      - source_labels: [__meta_dns_name]
+        target_label: __param_hostname  # Make domain name become 'Host' header for probe requests
 
   - job_name: 'blackbox-icmp'
     metrics_path: /probe
