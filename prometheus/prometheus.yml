@@ -20,62 +20,45 @@ scrape_configs:
     scrape_interval: 5s
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
-    file_sd_configs:
-      - files:
-        - pinghosts.yaml
+    dns_sd_configs:
+      - names:
+          - google.com
+          - githut.com
+          - apple.com
+        type: A
+        port: 443
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
         target_label: __param_target
         replacement: https://$1/  # Make probe URL be like https://1.2.3.4:443/
       - source_labels: [__param_target]
         target_label: instance
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
-        target_label: humanname
-        replacement: $2
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #third state whether this is testing external or internal network
-        target_label: routing
-        replacement: $3
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
-        target_label: switching
-        replacement: $4
       - target_label: __address__
         replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
       - source_labels: [__meta_dns_name]
         target_label: __param_hostname  # Make domain name become 'Host' header for probe requests
+      - source_labels: [__meta_dns_name]
+        target_label: vhost  # and store it in 'vhost' label
 
   - job_name: 'blackbox-icmp'
     metrics_path: /probe
     scrape_interval: 5s
     params:
       module: [icmp_ipv4]  # Look for a icmp response.
-    file_sd_configs:
-      - files:
-        - pinghosts.yaml
+    dns_sd_configs:
+      - names:
+          - google.com
+          - githut.com
+          - apple.com
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
-        target_label: instance
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
-        target_label: humanname
-        replacement: $2
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #third state whether this is testing external or internal network
-        target_label: routing
-        replacement: $3
-      - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
-        target_label: switching
-        replacement: $4
-      - source_labels: [instance]
         target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
       - target_label: __address__
         replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
-
+      - source_labels: [__meta_dns_name]
+        target_label: vhost  # and store it in 'vhost' label
 
   - job_name: 'nodeexp'
     static_configs:
