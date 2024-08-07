@@ -54,7 +54,7 @@ scrape_configs:
       - targets:
         - "google.com;google"
         - "apple.com;apple"
-        - "github.com:github"
+        - "github.com;github"
     relabel_configs:
       - source_labels: [__address__]
         regex: '(.*);(.*)'  #first is the url, thus unique for instance
