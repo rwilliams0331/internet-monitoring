@@ -23,7 +23,7 @@ scrape_configs:
     dns_sd_configs:
       - names:
           - google.com
-          - githut.com
+          - github.com
           - apple.com
         type: A
         port: 443
@@ -48,7 +48,7 @@ scrape_configs:
     dns_sd_configs:
       - names:
           - google.com
-          - githut.com
+          - github.com
           - apple.com
     relabel_configs:
       - source_labels: [__address__]
