@@ -26,8 +26,10 @@ scrape_configs:
     relabel_configs:
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
+        target_label: __param_target
+        replacement: https://$1/  # Make probe URL be like https://1.2.3.4:443/
+      - source_labels: [__param_target]
         target_label: instance
-        replacement: https://www.$1/
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
         target_label: humanname
@@ -40,8 +42,6 @@ scrape_configs:
         regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
         target_label: switching
         replacement: $4
-      - source_labels: [instance]
-        target_label: __param_target
       - target_label: __address__
         replacement: 100.64.0.3:9115  # The blackbox exporter's real hostname:port.
       - source_labels: [__meta_dns_name]
