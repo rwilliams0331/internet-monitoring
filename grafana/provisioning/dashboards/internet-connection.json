@@ -30,7 +30,7 @@
           "custom": {
             "axisLabel": "Mb/s",
             "axisPlacement": "left",
-            "axisSoftMax": 40,
+            "axisSoftMax": 80,
             "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -867,7 +867,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HTTP Probe Duration",
+      "title": "TLS Probe Duration",
       "transparent": true,
       "type": "timeseries"
     }
@@ -882,7 +882,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
