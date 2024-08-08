@@ -30,7 +30,7 @@
           "custom": {
             "axisLabel": "Mb/s",
             "axisPlacement": "left",
-            "axisSoftMax": 80,
+            "axisSoftMax": 40,
             "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -861,7 +861,7 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 5,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{humanname}}",
           "refId": "A"
         }
       ],
@@ -882,7 +882,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -913,5 +913,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 55
+  "version": 56
 }
