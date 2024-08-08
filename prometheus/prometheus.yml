@@ -27,7 +27,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
         target_label: instance
-        replacement: https://www.$1/
+        replacement: $1
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
         target_label: humanname
@@ -55,21 +55,21 @@ scrape_configs:
         - pinghosts.yaml
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*);(.*);(.*);(.*)'  #first is the url, thus unique for instance
+        regex: '(https:\/\/(.*)\/);(.*);(.*);(.*)'  #first is the url, thus unique for instance
         target_label: instance
-        replacement: $1
+        replacement: $2
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
         target_label: humanname
-        replacement: $2
+        replacement: $3
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #third state whether this is testing external or internal network
         target_label: routing
-        replacement: $3
+        replacement: $4
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
         target_label: switching
-        replacement: $4
+        replacement: $5
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__

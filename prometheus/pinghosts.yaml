@@ -1,7 +1,7 @@
 - targets:  # url;humanname;routing;switch
-    - google.com;google;external;internetbox
-    - github.com;github;external;internetbox
-    - apple.com;apple;external;internetbox
-    - 64.139.91.217;sheriff;external;internetbox
-    - 165.166.157.253;kershaw;external;internetbox
+    - https://google.com/;google;external;internetbox
+    - https://github.com/;github;external;internetbox
+    - https://apple.com/;apple;external;internetbox
+    - https://64.139.91.217/;sheriff;external;internetbox
+    - https://165.166.157.253/;kershaw;external;internetbox
 
