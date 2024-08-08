@@ -264,7 +264,56 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi0 Down"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "5G Down"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi1 Up"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "5G Up"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi1 Down"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2.4G Down"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi0 Up"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2.4G Up"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -468,7 +517,56 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi0 out"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "5G Down"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi1 In"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "5G Up"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi1 out"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2.4G Down"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wifi0 In"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "2.4G Up"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
