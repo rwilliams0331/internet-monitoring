@@ -1,4 +1,4 @@
 - targets:  # url;humanname;routing;switch
-    - https://www.google.com/;google;external;internetbox
-    - https://www.github.com/;github;external;internetbox
-    - https://www.apple.com/;apple;external;internetbox
+    - google.com;google;external;internetbox
+    - github.com;github;external;internetbox
+    - apple.com;apple;external;internetbox
