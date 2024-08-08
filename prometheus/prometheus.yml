@@ -61,15 +61,15 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #second is humanname to use in charts
         target_label: humanname
-        replacement: $3
+        replacement: $2
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #third state whether this is testing external or internal network
         target_label: routing
-        replacement: $4
+        replacement: $3
       - source_labels: [__address__]
         regex: '(.*);(.*);(.*);(.*)'  #fourth is which switch/router the device is connected to.
         target_label: switching
-        replacement: $5
+        replacement: $4
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
