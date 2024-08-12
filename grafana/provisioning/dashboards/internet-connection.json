@@ -929,7 +929,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "rate({phase=\"tls\"}[$__interval])*1000",
+          "expr": "max_over_time((irate(probe_http_duration_seconds{job=\"blackbox-http\",phase=\"tls\"}[45s]))[$__interval:10s])*1000",
           "instant": false,
           "interval": "",
           "intervalFactor": 5,
@@ -944,7 +944,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [
@@ -985,5 +985,5 @@
   "timezone": "browser",
   "title": "internet-connection",
   "uid": "wan",
-  "version": 58
+  "version": 60
 }
